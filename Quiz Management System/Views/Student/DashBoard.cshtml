@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "DashBoard";
+}
+<head>
+   <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
+</head>
+<body class="mb-3" >
+    
+    <div >
+        
+        <header class="bar ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 align-content-center">
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
+            <ul class="navbar-nav flex-grow-1 text-center">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Quiz">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Marks">Marks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Course">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="DashBoard">Reports</a>
+                </li>
+            </ul>
+        </div>
+
+        </nav>
+        </header>
+
+        <div class="grid ">
+        <div class="card p-3 shadow cards" style="width:600px;height:300px">
+          <div class="content">
+            <h3>Pratham</h3>
+            <h5>I love designing websites and keep things as simple as possible. My goals is to focus on minimalism and conveying the message that you want to send</h5>
+          </div>
+        </div>
+        <div class="card p-3 shadow  cards " style="width:600px;height:300px">
+          <div class="content">
+            <h3>Pratham</h3>
+            <h5>I love designing websites and keep things as simple as possible. My goals is to focus on minimalism and conveying the message that you want to send</h5>
+          </div>
+        </div>
+        <div class="card p-3 shadow graph cards " style="width:600px;height:620px">
+          <div class="content">
+            <h3>Pratham</h3>
+            <h5>I love designing websites and keep things as simple as possible. My goals is to focus on minimalism and conveying the message that you want to send</h5>
+          </div>
+        </div>
+
+        </div>
+    </div>
+    </body>
