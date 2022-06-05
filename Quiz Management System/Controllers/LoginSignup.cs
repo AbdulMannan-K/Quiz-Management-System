@@ -38,7 +38,7 @@ namespace Quiz_Management_System.Controllers
             {
                 Teacher t = JsonConvert.DeserializeObject<Teacher>(serializedUser);
                 _db.teachers.Add(t);
-            }
+            }   
             _db.SaveChanges();
             return View();
         }

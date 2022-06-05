@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Quiz>
+@{
+    ViewData["Title"] = "Quiz";
+}
+<head>
+   <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
+</head>
+<body class="mb-3" >
+    
+    <div >
+        
+        <header class="bar ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 align-content-center">
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
+            <ul class="navbar-nav flex-grow-1 text-center">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="LoginSignup" asp-action="login">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="DashBoard">Reports</a>
+                </li>
+            </ul>
+        </div>
+
+        </nav>
+        </header>
+
+        <div class="form-popup overflow-auto" id="myForm">
+          <form  class="container">
+            <h1>Login</h1>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+
+        <div class="card shadow mb-3 p-1" style="width:98vw;height:50px;border-radius:8px">
+            <div class="flex2">
+                  <div class="text">Quizes</div>
+              <div class="flex1">
+                  <div class="InputContainer"><input placeholder="Search"  style="border-radius:8px;border:none"/></div>
+                  <div ><a class="btn btn-primary" style="width:300px;border-radius:8px" onclick="openForm()">New Quiz</a></div>
+              </div>
+            </div>
+        </div>
+
+        <div class="quizes">
+             <div class="card shadow" style="border-radius:8px; align-items:center">
+                 <div><br /></div>
+                 <a class="cards flex quiz" style="width:95%" asp-controller="Teacher" asp-action="QuizInfo">
+                             <div>Name</div>
+                             <div>Course</div>
+                             <div>Marks</div>
+                            <div>date</div>
+                             <div>date</div>
+                         </a> 
+                 @foreach ( var obj in Model)
+                 {
+                     @if (obj.Taken==false)
+                     {
+                         <a class="cards flex" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
+                             <div>@obj.Name</div>
+                             <div>@obj.Course</div>
+                             <div>@obj.Marks</div>
+                             <div>@obj.date.Date</div>
+                             <div>@obj.date.TimeOfDay</div>
+                         </a>
+                     }
+                 }
+                 <div><br /></div>
+             </div>
+             <div class="card shadow" style="border-radius:8px; align-items:center">
+                 <div><br /></div>
+                 @foreach ( var obj in Model)
+                 {
+                     @if (obj.Taken==true)
+                     {
+                         <div class="cards flex" style="width:95%">
+                             <div>@obj.Name</div>
+                             <div>@obj.Course</div>
+                             <div>@obj.Marks</div>
+                             <div>@obj.date.Date</div>
+                             <div>@obj.date.TimeOfDay</div>
+                         </div>
+                     }
+                 }
+                 <div><br /></div>
+             </div>
+        </div>
+
+    </div>
+        <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+</body>

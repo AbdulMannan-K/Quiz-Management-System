@@ -8,7 +8,13 @@ namespace Quiz_Management_System.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public int Weightage { get; set; }
+        [Required]
+        public int Marks { get; set; }
+        [Required]
+        public bool Taken { get; set; }
         [Required]
         public Course Course { get; set; }
         [ForeignKey("QuizMaterial")]
