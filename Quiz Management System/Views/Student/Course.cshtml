@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Course";
+}
+
+<head>
+   <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
+</head>
+<body class="mb-3" >
+    
+    <div >
+        
+        <header class="bar ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 align-content-center">
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
+            <ul class="navbar-nav flex-grow-1 text-center">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="LoginSignup" asp-action="login">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="DashBoard">Reports</a>
+                </li>
+            </ul>
+        </div>
+
+        </nav>
+        </header>
+         
+        <div class="card shadow mb-3 p-1" style="width:98vw;height:50px;border-radius:8px">
+            <div class="flex2">
+                  <div class="text">Courses</div>
+              <div class="flex1">
+                  <div class="InputContainer"><input placeholder="Search"  style="border-radius:8px;border:none"/></div>
+                  
+              </div>
+            </div>
+        </div>
+
+        <div class="courses">
+             <div class="card shadow" style="border-radius:8px;align-self:safe center; align-items:center">
+                 <div><br /></div>
+                 <a class="cards flex quiz" style="width:50%;height:200px;align-self:safe center" asp-controller="Student" asp-action="CourseInfo">
+                             <div>ID</div>
+                             <div>Course Name</div>
+                         </a> 
+                 @foreach ( var obj in Model)
+                 {
+                     @if (obj.Taken==false)
+                     {
+                         <a class="cards flex" style="width:95%"  asp-controller="Student" asp-action="CourseInfo">
+                             <div>@obj.Id</div>
+                             <div>@obj.CourseName</div>
+                         </a>
+                     }
+                 }
+                 <div><br /></div>
+             </div>
+         </div>
+
+    </div>
+        <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+</body>
+
+
