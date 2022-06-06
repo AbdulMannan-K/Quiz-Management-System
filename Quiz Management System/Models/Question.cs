@@ -15,6 +15,7 @@ namespace Quiz_Management_System.Models
         public List<Choice> choices { get; set; }
         [Required]
         public bool isMCQ { get; set; }
-
+        public Quiz quiz { get; set; }
+        public int quizId { get; set; }
     }
 }

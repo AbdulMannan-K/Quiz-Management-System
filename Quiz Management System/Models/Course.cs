@@ -7,12 +7,10 @@ namespace Quiz_Management_System.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public string CourseName { get; set; }
-        [Required]
+        public string? CourseName { get; set; }
         public List<Student> students { get; set; }
-        [Required]
-        public Teacher teacher { get; set; }
+        public int? teacherId { get; set; }
+        public Teacher? teacher { get; set; }
         public List<Quiz> quizzes { get; set; }
 
     }

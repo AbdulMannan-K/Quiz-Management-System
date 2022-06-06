@@ -45,8 +45,11 @@ namespace Quiz_Management_System.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult login(User user, IFormCollection form) 
+        public IActionResult login(User user, IFormCollection form)
         {
+            //    Console.WriteLine(user.Name);
+            //    Console.WriteLine(user.E);
+            Console.WriteLine("A Teacher: " + form["Teacher"]);
             var serializedUser = JsonConvert.SerializeObject(user);
             if (string.IsNullOrEmpty(form["Teacher"]))
             {
@@ -56,7 +59,10 @@ namespace Quiz_Management_System.Controllers
                 {
                     if (list[i].EmailAddress == s.EmailAddress && list[i].Password == s.Password)
                     {
-                        Console.WriteLine("Successfull");
+                        HttpContext.Session.SetString("Email", list[i].EmailAddress);
+                        HttpContext.Session.SetString("Id", list[i].Id.ToString());
+                        Console.WriteLine(list[i].Id);
+                        Console.WriteLine("Teacher Successfull");
                         break;
                     }
                     else
@@ -71,7 +77,10 @@ namespace Quiz_Management_System.Controllers
                 {
                     if (list[i].EmailAddress == t.EmailAddress && list[i].Password == t.Password)
                     {
-                        Console.WriteLine("Successfull");
+                        HttpContext.Session.SetString("Email", list[i].EmailAddress);
+                        HttpContext.Session.SetString("Id", list[i].Id.ToString());
+                        Console.WriteLine(list[i].Id);
+                        Console.WriteLine("Student Successfull");
                         break;
                     }
                     else

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quiz_Management_System.Data;
 
@@ -11,9 +12,10 @@ using Quiz_Management_System.Data;
 namespace Quiz_Management_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220606081306_FinalModelv1")]
+    partial class FinalModelv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,20 +41,13 @@ namespace Quiz_Management_System.Migrations
 
             modelBuilder.Entity("Quiz_Management_System.Models.Choice", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("choice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("questionId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("choice");
 
                     b.HasIndex("questionId");
 
@@ -68,9 +63,10 @@ namespace Quiz_Management_System.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CourseName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("teacherId")
+                    b.Property<int>("teacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -105,20 +101,13 @@ namespace Quiz_Management_System.Migrations
 
             modelBuilder.Entity("Quiz_Management_System.Models.Link", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("link")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("quizMaterialId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("link");
 
                     b.HasIndex("quizMaterialId");
 
@@ -177,6 +166,9 @@ namespace Quiz_Management_System.Migrations
 
                     b.Property<bool>("Taken")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Weightage")
+                        .HasColumnType("int");
 
                     b.Property<int>("courseId")
                         .HasColumnType("int");
@@ -324,7 +316,9 @@ namespace Quiz_Management_System.Migrations
                 {
                     b.HasOne("Quiz_Management_System.Models.Teacher", "teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("teacherId");
+                        .HasForeignKey("teacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("teacher");
                 });

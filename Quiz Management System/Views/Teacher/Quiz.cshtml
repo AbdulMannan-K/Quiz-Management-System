@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Quiz>
+﻿@model ViewModel
 @{
     ViewData["Title"] = "Quiz";
 }
@@ -6,7 +6,6 @@
    <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
 </head>
 <body class="mb-3" >
-    
     <div >
         
         <header class="bar ">
@@ -15,7 +14,7 @@
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
             <ul class="navbar-nav flex-grow-1 text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Quiz</a>
+                    <a class="nav-link text-dark" asp-area=""  asp-controller="Home" asp-action="Index">Quiz</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
@@ -32,20 +31,57 @@
         </nav>
         </header>
 
-        <div class="form-popup overflow-auto" id="myForm">
-          <form  class="container">
-            <h1>Login</h1>
+        <div class="form-popup shadow p-3" id="myForm" style="display:none">
+          <form method="post"  class="container">
+            <h3 style="justify-self:center">Add a new Question</h3>
+            <select class="form-select m-1" name="course" id="type" aria-label="Default select example" >
+                  <option selected>Select Course</option>
+                @foreach (var obj in Model.courses)
+                {
+                  <option value=@obj.CourseName>@obj.CourseName</option>
+                }
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+                </select>
+                  <input type="text" class="form-control m-1" placeholder="Enter Name" name="name" >
+                   <br />
+            <div id="Questions">
+                <div id="question">
+                <div style="display:flex">
+                <select class="form-select m-1" name="type" id="type" aria-label="Default select example" >
+                  <option selected>Open this select menu</option>
+                  <option value="MCQ">MCQ</option>
+                  <option value="Short Question">Short Question</option>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+                </select>
+                  <button class="btn btn-outline-danger m-1" onclick="removeQuestion(this)" style="margin-right:1px" type="button">Remove</button>
+                  <input type="text" class="form-control m-1" placeholder="Enter Marks"  name="weight" >
 
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </div>
+                <textarea placeholder="Type Question Statment" class="form-control m-1" name="statment" style="height:150px;width:500px"></textarea>
+                <textarea placeholder="Type Answer " class="form-control m-1" name="answer" style="height:30px;width:500px"></textarea>
+
+                <div id="mainDiv">
+                <div class="input-group m-1" id="mDiv">
+                  <input type="text" class="form-control" placeholder="Option" id="option" style="" aria-label="Options" name="option" aria-describedby="basic-addon2">
+                  <div class="input-group-append" id="subDiv">
+                    <button class="btn btn-outline-danger" onclick="remove(this)" id="rmv" type="button">Remove</button>
+                    <button class="btn btn-outline-secondary" id="btnAdd" onclick="addOption(this)" type="button">Add</button>
+                  </div>
+                </div>
+                </div>
+                <div style="width:100%;border-bottom:1px solid black;margin-bottom:10px;margin-top:10px"></div>
+
+                </div>
+                </div>
+                   <button class="btn btn-outline-primary m-1" onclick="addQuestion()" type="button" >Add Question</button>
+                   <input type="date" class="form-control m-1" name="date" style="outline:none" >
+
+            <button type="submit" class="btn btn-outline-primary m-1" asp-action="Quiz">Save</button>
+            <button type="button" class="btn cancel m-1 btn-outline-secondary" onclick="closeForm()">Close</button>
           </form>
         </div>
+
+
 
         <div class="card shadow mb-3 p-1" style="width:98vw;height:50px;border-radius:8px">
             <div class="flex2">
@@ -60,23 +96,15 @@
         <div class="quizes">
              <div class="card shadow" style="border-radius:8px; align-items:center">
                  <div><br /></div>
-                 <a class="cards flex quiz" style="width:95%" asp-controller="Teacher" asp-action="QuizInfo">
-                             <div>Name</div>
-                             <div>Course</div>
-                             <div>Marks</div>
-                            <div>date</div>
-                             <div>date</div>
-                         </a> 
-                 @foreach ( var obj in Model)
+                 @foreach ( var obj in Model.quizzes)
                  {
                      @if (obj.Taken==false)
                      {
-                         <a class="cards flex" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
-                             <div>@obj.Name</div>
-                             <div>@obj.Course</div>
-                             <div>@obj.Marks</div>
-                             <div>@obj.date.Date</div>
-                             <div>@obj.date.TimeOfDay</div>
+                         <a class="cards flex2 quiz" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
+                             <p style="text-align:center">@obj.Name</p>
+                             <p style="text-align:center">@obj.Course.CourseName</p>
+                             <p style="text-align:center">@obj.Marks</p>
+                             <p style="text-align:center">@obj.date.Date</p>
                          </a>
                      }
                  }
@@ -84,16 +112,15 @@
              </div>
              <div class="card shadow" style="border-radius:8px; align-items:center">
                  <div><br /></div>
-                 @foreach ( var obj in Model)
+                 @foreach ( var obj in Model.quizzes)
                  {
                      @if (obj.Taken==true)
                      {
-                         <div class="cards flex" style="width:95%">
+                         <div class="cards flex quiz" style="width:95%">
                              <div>@obj.Name</div>
-                             <div>@obj.Course</div>
+                             <div>@obj.Course.CourseName</div>
                              <div>@obj.Marks</div>
                              <div>@obj.date.Date</div>
-                             <div>@obj.date.TimeOfDay</div>
                          </div>
                      }
                  }
@@ -102,13 +129,36 @@
         </div>
 
     </div>
-        <script>
-            function openForm() {
-              document.getElementById("myForm").style.display = "block";
-            }
+    <script>
+var Quizes = new Array();
 
-            function closeForm() {
-              document.getElementById("myForm").style.display = "none";
-            }
-        </script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+        function addOption(element) {
+                
+            var container = document.getElementById("mainDiv");
+            var section = document.getElementById("mDiv");
+            element.parentElement.parentElement.parentElement.appendChild(section.cloneNode(true));
+        }
+
+        function remove(element) {
+            element.parentElement.parentElement.remove()
+        }
+
+        function addQuestion() {
+             var container = document.getElementById("Questions");
+            var section = document.getElementById("question");
+            container.appendChild(section.cloneNode(true));
+        }
+
+        function removeQuestion(element) {
+            element.parentElement.parentElement.remove()
+        }
+
+    </script>
 </body>

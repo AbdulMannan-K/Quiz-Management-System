@@ -81,17 +81,19 @@ input{
     font: bolder;
 }
 .form-popup {
-    right:800px;
+    right:700px;
     position: fixed;
-    background-color:blue;
+    background-color:white;
     border: 3px solid #f1f1f1;
+    overflow-y:auto;
+    max-height:80vh;
     z-index: 9;
 }
 
 form{
     display:grid;
     justify-content:center;
-    grid-template-columns:auto auto;
+    grid-template-columns:auto;
 }
 
 .quiz:hover{

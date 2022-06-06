@@ -10,15 +10,15 @@ namespace Quiz_Management_System.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int Weightage { get; set; }
-        [Required]
         public int Marks { get; set; }
         [Required]
         public bool Taken { get; set; }
+        public int courseId { get; set; }
         [Required]
         public Course Course { get; set; }
+        public int quizMaterialId { get; set; }
         [ForeignKey("QuizMaterial")]
-        public QuizMaterial quizMaterial { get; set; }  
+        public QuizMaterial quizMaterial { get; set; } 
         [Required]
         public List<Question> Questions { get; set; }
         [Required]

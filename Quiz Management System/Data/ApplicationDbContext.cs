@@ -18,5 +18,10 @@ namespace Quiz_Management_System.Data
         public DbSet<Student> students { get; set; }
         public DbSet<Teacher> teachers { get; set; }
 
+        public DbSet<CourseStudent> courseStudents { get; set; }
+        public DbSet<Choice> choices { get; set; }
+        public DbSet<Link> links { get; set; }
+
+
     }
 }
