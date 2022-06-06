@@ -27,10 +27,11 @@ namespace Quiz_Management_System.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult signup(User user,IFormCollection form)
+        public IActionResult signup(User user, IFormCollection form)
         {
             var serializedUser = JsonConvert.SerializeObject(user);
-            if (string.IsNullOrEmpty(form["Teacher"])) {
+            if (string.IsNullOrEmpty(form["Teacher"]))
+            {
                 Student s = JsonConvert.DeserializeObject<Student>(serializedUser);
                 _db.students.Add(s);
             }
@@ -38,7 +39,7 @@ namespace Quiz_Management_System.Controllers
             {
                 Teacher t = JsonConvert.DeserializeObject<Teacher>(serializedUser);
                 _db.teachers.Add(t);
-            }   
+            }
             _db.SaveChanges();
             return View();
         }
@@ -55,7 +56,7 @@ namespace Quiz_Management_System.Controllers
             {
                 Student s = JsonConvert.DeserializeObject<Student>(serializedUser);
                 var list = _db.students.ToList();
-                for(int i=0; i < list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     if (list[i].EmailAddress == s.EmailAddress && list[i].Password == s.Password)
                     {
@@ -95,3 +96,5 @@ namespace Quiz_Management_System.Controllers
         }
     }
 }
+
+
