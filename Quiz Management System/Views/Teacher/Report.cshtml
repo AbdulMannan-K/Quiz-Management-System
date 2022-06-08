@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Report>
+@{
+    ViewData["Title"] = "Report";
+}
+
+<head>
+   <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
+</head>
+<body class="mb-3" >
+        
+        <header class="bar ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 align-content-center">
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
+            <ul class="navbar-nav flex-grow-1 text-center">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area=""  asp-controller="Teacher" asp-action="Quiz">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Course">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Report">Reports</a>
+                </li>
+            </ul>
+        </div>
+
+        </nav>
+        </header>
+
+        <div style="width:98vw">
+             <div class="card shadow" style="border-radius:8px; align-items:center">
+                 <div><br /></div>
+                 @foreach(var obj in Model)
+                 {
+                         <a class="cards flex2 quiz" style="width:95%"  asp-controller="Teacher" >
+                             <p style="text-align:center">@obj.ReportNumber</p>
+                             <p style="text-align:center">@obj.teacherId</p>
+                             <p style="text-align:center">@obj.ReportStatement</p>
+                         </a>
+                 }
+                 <div><br /></div>
+             </div>
+        </div>
+
+    <script>
+var Quizes = new Array();
+
+        function addOption(element) {
+                
+            var container = document.getElementById("mainDiv");
+            var section = document.getElementById("mDiv");
+            element.parentElement.parentElement.parentElement.appendChild(section.cloneNode(true));
+        }
+
+        function remove(element) {
+            element.parentElement.parentElement.remove()
+        }
+
+        function addQuestion() {
+             var container = document.getElementById("Questions");
+            var section = document.getElementById("question");
+            container.appendChild(section.cloneNode(true));
+        }
+
+        function removeQuestion(element) {
+            element.parentElement.parentElement.remove()
+        }
+
+    </script>
+</body>
+
+

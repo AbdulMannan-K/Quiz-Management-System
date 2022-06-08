@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Quiz>
 @{
     ViewData["Title"] = "Quiz";
 }
@@ -17,7 +17,7 @@
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
             <ul class="navbar-nav flex-grow-1 text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Quiz</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Quiz">Quiz</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
@@ -26,7 +26,7 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="LoginSignup" asp-action="login">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="DashBoard">Reports</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Report">Reports</a>
                 </li>
             </ul>
         </div>
@@ -51,19 +51,17 @@
                              <div>Name</div>
                              <div>Course</div>
                              <div>Marks</div>
-                            <div>date</div>
                              <div>date</div>
                          </a> 
-                 @foreach ( var obj in Model)
+                 @foreach(var obj in Model)
                  {
                      @if (obj.Taken==false)
                      {
-                         <a class="cards flex" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
-                             <div>@obj.Name</div>
-                             <div>@obj.Course</div>
-                             <div>@obj.Marks</div>
-                             <div>@obj.date.Date</div>
-                             <div>@obj.date.TimeOfDay</div>
+                         <a class="cards flex2 quiz" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
+                             <p style="text-align:center">@obj.Name</p>
+                             <p style="text-align:center">@obj.courseId</p>
+                             <p style="text-align:center">@obj.Marks</p>
+                             <p style="text-align:center">@obj.date.Date</p>
                          </a>
                      }
                  }
@@ -75,12 +73,11 @@
                  {
                      @if (obj.Taken==true)
                      {
-                         <div class="cards flex" style="width:95%">
+                         <div class="cards flex quiz" style="width:95%">
                              <div>@obj.Name</div>
-                             <div>@obj.Course</div>
+                             <div>@obj.courseId</div>
                              <div>@obj.Marks</div>
                              <div>@obj.date.Date</div>
-                             <div>@obj.date.TimeOfDay</div>
                          </div>
                      }
                  }

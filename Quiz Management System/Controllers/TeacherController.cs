@@ -55,7 +55,6 @@ namespace Quiz_Management_System.Controllers
             ViewModel vm = new ViewModel();
             vm.courses = courses1;
             vm.quizzes = quizzes1;
-            ViewData["id"] = HttpContext.Session.GetString("Id");
 
             if (HttpContext.Session.GetString("Id") != null)
             {
@@ -145,6 +144,8 @@ namespace Quiz_Management_System.Controllers
                 }
             }
 
+
+
             ViewModel vm = new ViewModel();
             vm.courses = courses1;
             vm.quizzes = quizzes1;
@@ -162,5 +163,61 @@ namespace Quiz_Management_System.Controllers
             }
 
         }
+
+        public IActionResult Course() {
+            IEnumerable<Course> courses = _db.courses.ToList();
+
+            if (HttpContext.Session.GetString("Id") != null)
+            {
+                return View(courses);
+            }
+            else
+            {
+                return RedirectToAction("login", "LoginSignup");
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Course(IFormCollection form)
+        {
+            IEnumerable<Course> courses = _db.courses.ToList();
+            IEnumerable<Teacher> teachers = _db.teachers.ToList();
+
+            int id = -1;
+            int.TryParse(HttpContext.Session.GetString("Id"), out id);
+
+            Console.WriteLine(id);
+
+            Course c = new Course();
+            string name = form["name"];
+            string pass = form["password"];
+            c.CourseName = name;
+            c.password = pass;
+            c.teacherId = id;
+            foreach(Teacher t in teachers) {
+                if (t.Id == id)
+                {
+                    c.teacher = t;
+                    break;
+                }
+            }
+            _db.courses.Add(c);
+            _db.SaveChanges();
+            courses.ToList().Add(c);
+            return View(courses);
+        }
+
+        public IActionResult Report()
+        {
+            IEnumerable<Report> reports = _db.reports.ToList();
+            return View(reports);
+        }
+
+        public IActionResult ReportDetail(Report report)
+        {
+            return View(report);
+        }
+
     }
 }

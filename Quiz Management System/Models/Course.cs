@@ -12,6 +12,7 @@ namespace Quiz_Management_System.Models
         public int? teacherId { get; set; }
         public Teacher? teacher { get; set; }
         public List<Quiz> quizzes { get; set; }
+        public string password { get; set; }
 
     }
 }
