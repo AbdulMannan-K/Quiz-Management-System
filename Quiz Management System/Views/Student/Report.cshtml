@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Course>
+﻿@model IEnumerable<Report>
 @{
-    ViewData["Title"] = "Course";
+    ViewData["Title"] = "Report";
 }
 
 <head>
@@ -23,7 +23,7 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Course">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="DashBoard">Reports</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Report">Reports</a>
                 </li>
             </ul>
         </div>
@@ -31,27 +31,25 @@
         </nav>
         </header>
 
+        
         <div class="form-popup shadow p-3" id="myForm" style="display:none">
           <form method="post"  class="container">
-            <h3 style="justify-self:center">Add a new Course</h3>
+            <h3 style="justify-self:center">Add a new Report</h3>
                    <br />
                   <input type="text" class="form-control" placeholder="Enter Teacher Email" name="tEmail" >
-                  <input type="text" class="form-control" placeholder="Enter Course Name" name="name" >
-                  <input type="text" class="form-control" placeholder="Enter Course Password" name="password" >
+                  <textarea type="text" class="form-control" placeholder="Enter Report" name="name" ></textarea>
 
             <button type="submit" class="btn btn-outline-primary m-1" asp-action="Course">Add</button>
             <button type="button" class="btn cancel m-1 btn-outline-secondary" onclick="closeForm()">Close</button>
           </form>
         </div>
 
-
-
         <div class="card shadow mb-3 p-1" style="width:98vw;height:50px;border-radius:8px">
             <div class="flex2">
-                  <div class="text">Quizes</div>
+                  <div class="text">Reports</div>
               <div class="flex1">
                   <div class="InputContainer"><input placeholder="Search"  style="border-radius:8px;border:none"/></div>
-                  <div ><a class="btn btn-primary" style="width:300px;border-radius:8px" onclick="openForm()">New Course</a></div>
+                  <div ><a class="btn btn-primary" style="width:300px;border-radius:8px" onclick="openForm()">New Report</a></div>
               </div>
             </div>
         </div>
@@ -61,11 +59,10 @@
                  <div><br /></div>
                  @foreach(var obj in Model)
                  {
-                         <a class="cards flex2 quiz" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
-                             <p style="text-align:center">@obj.CourseName</p>
-                             <p style="text-align:center">@obj.Id</p>
-                             <p style="text-align:center">@obj.password</p>
+                         <a class="cards flex2 quiz" style="width:95%"  asp-controller="Student">
+                             <p style="text-align:center">@obj.ReportNumber</p>
                              <p style="text-align:center">@obj.teacherId</p>
+                             <p style="text-align:center">@obj.ReportStatement</p>
                          </a>
                  }
                  <div><br /></div>

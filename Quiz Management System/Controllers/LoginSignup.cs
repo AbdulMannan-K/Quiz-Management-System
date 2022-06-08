@@ -63,7 +63,7 @@ namespace Quiz_Management_System.Controllers
                         HttpContext.Session.SetString("Email", list[i].EmailAddress);
                         HttpContext.Session.SetString("Id", list[i].Id.ToString());
                         Console.WriteLine(list[i].Id);
-                        Console.WriteLine("Teacher Successfull");
+                        Console.WriteLine("Student Successfull");
                         break;
                     }
                     else
@@ -81,7 +81,7 @@ namespace Quiz_Management_System.Controllers
                         HttpContext.Session.SetString("Email", list[i].EmailAddress);
                         HttpContext.Session.SetString("Id", list[i].Id.ToString());
                         Console.WriteLine(list[i].Id);
-                        Console.WriteLine("Student Successfull");
+                        Console.WriteLine("Teacher Successfull");
                         break;
                     }
                     else

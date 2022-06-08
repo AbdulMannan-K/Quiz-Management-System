@@ -6,6 +6,8 @@ namespace Quiz_Management_System.Models
     {
         [Key]
         public int ReportNumber { get; set; }
+
+        public string ReportStatement { get; set; }
         public int studentId { get; set; }
 
         [Required]

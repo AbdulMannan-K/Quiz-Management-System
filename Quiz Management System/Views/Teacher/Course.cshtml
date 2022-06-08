@@ -7,6 +7,7 @@
    <link rel="stylesheet" href="~/css/t_dashboard.css" asp-append-version="true" />
 </head>
 <body class="mb-3" >
+    <div >
         
         <header class="bar ">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 align-content-center">
@@ -14,16 +15,16 @@
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="width:100%">
             <ul class="navbar-nav flex-grow-1 text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area=""  asp-controller="Student" asp-action="Quiz">Quiz</a>
+                    <a class="nav-link text-dark" asp-area=""  asp-controller="Teacher" asp-action="Quiz">Quiz</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Marks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Course">Courses</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Course">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="DashBoard">Reports</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="DashBoard">Reports</a>
                 </li>
             </ul>
         </div>
@@ -35,7 +36,6 @@
           <form method="post"  class="container">
             <h3 style="justify-self:center">Add a new Course</h3>
                    <br />
-                  <input type="text" class="form-control" placeholder="Enter Teacher Email" name="tEmail" >
                   <input type="text" class="form-control" placeholder="Enter Course Name" name="name" >
                   <input type="text" class="form-control" placeholder="Enter Course Password" name="password" >
 
@@ -63,7 +63,6 @@
                  {
                          <a class="cards flex2 quiz" style="width:95%"  asp-controller="Teacher" asp-action="QuizInfo">
                              <p style="text-align:center">@obj.CourseName</p>
-                             <p style="text-align:center">@obj.Id</p>
                              <p style="text-align:center">@obj.password</p>
                              <p style="text-align:center">@obj.teacherId</p>
                          </a>
